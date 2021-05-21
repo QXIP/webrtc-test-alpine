@@ -305,10 +305,6 @@ input {
   }
 }
 
-filter {
-  json_fields {}
-}
-
 output {
   loki {
     basic_auth_password => "some_very_secure_password_hash_here"
