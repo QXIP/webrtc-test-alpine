@@ -15,7 +15,7 @@ docker run -it --rm --name=webrtc-stress-test-publisher \
     -e URL_QUERY='#config.prejoinPageEnabled=false&userInfo.displayName=Participant-$s-$t' \
     -e SESSIONS=1 \
     -e TABS_PER_SESSION=1 \
-    -e SHOW_STATS=false \
+    -e SHOW_STATS=true \
     -e ENABLE_RTC_STATS=true \
     -e PASTASH_WSS="$STATS_COLLECTOR" \
     qxip/webrtc-stress-test-alpine:latest

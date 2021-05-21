@@ -354,8 +354,6 @@ module.exports.Stats = class {
       }
       if (pastashEndpoint) {
         statsSocket.send(JSON.stringify(stats));
-      } else {
-        console.log(JSON.stringify(stats));
       }
 
 
