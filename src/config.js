@@ -207,6 +207,13 @@ streams are removed.`,
     env: 'RTC_STATS_TIMEOUT',
     arg: 'rtc-stats-timeout',
   },
+  enablePastash: {
+    doc: `Enables Stats ws/wss streaming to paStash.`,
+    format: String,
+    default: '',
+    env: 'ENABLE_PASTASH',
+    arg: 'enable-pastash',
+  },
   //
   scriptPath: {
     doc: `A javascript file path; if set, the file content will be injected \

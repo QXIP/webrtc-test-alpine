@@ -6,6 +6,8 @@ RUN ln -s /usr/bin/chromium-browser /usr/bin/chromium-browser-unstable
 RUN mkdir -p /app/
 COPY media/video.mp4 /app/
 
+ENV V 0099999
+
 WORKDIR /app
 COPY package.json yarn.lock observertc.js entrypoint.sh /app/
 COPY scripts /app/scripts/

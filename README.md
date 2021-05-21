@@ -142,6 +142,43 @@ docker run -it --rm --name=webrtc-stress-test-viewer \
     qxip/webrtc-stress-test-pastash:latest
 ```
 
+### Meething
+
+Starts one send-receive participant, with a random audio activation pattern:
+
+```sh
+docker pull qxip/webrtc-stress-test-pastash:latest
+docker run -it --rm --name=webrtc-stress-test-publisher \
+    -v /dev/shm:/dev/shm \
+    -e VIDEO_PATH=/app/video.mp4 \
+    -e URL=$EDUMEET_URL \
+    -e URL_QUERY='displayName=Publisher $s-$t' \
+    -e SCRIPT_PATH=/app/scripts/meething.js \
+    -e SESSIONS=1 \
+    -e TABS_PER_SESSION=1 \
+    -e SHOW_STATS=false \
+    -e ENABLE_RTC_STATS=true \
+    -e PASTASH_WSS='wss://pastash.collector:9090' \
+    qxip/webrtc-stress-test-pastash:latest
+```
+
+Starts 10 receive-only participants:
+
+```sh
+docker pull qxip/webrtc-stress-test-pastash:latest
+docker run -it --rm --name=webrtc-stress-test-viewer \
+    -v /dev/shm:/dev/shm \
+    -e URL=$EDUMEET_URL \
+    -e URL_QUERY='displayName=Viewer $s-$t' \
+    -e SCRIPT_PATH=/app/scripts/meething.js \
+    -e SESSIONS=1 \
+    -e TABS_PER_SESSION=10 \
+    -e SHOW_STATS=false \
+    -e ENABLE_RTC_STATS=true \
+    -e PASTASH_WSS='wss://pastash.collector:9090' \
+    qxip/webrtc-stress-test-pastash:latest
+```
+
 ### Jitsi
 
 Starts one send-receive participant:
