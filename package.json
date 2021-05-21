@@ -1,0 +1,62 @@
+{
+  "name": "webrtc-stress-test-alpine",
+  "version": "1.0.3",
+  "author": {
+    "name": "Lorenzo Mangani <lorenzo.mangani@gmail.com>",
+    "url": "https://github.com/qxip"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.min.js",
+    "start:dev": "nodemon index.js",
+    "test": "mocha",
+    "build": "yarn && yarn lint && webpack --config webpack.config.js -p && docker build -t qxip/webrtc-stress-test-alpine .",
+    "push": "docker push qxip/webrtc-stress-test-alpine:latest && docker tag qxip/webrtc-stress-test-alpine qxip/webrtc-stress-test-alpine:$npm_package_version && docker push qxip/webrtc-stress-test-alpine:$npm_package_version",
+    "clean": "rm -f app.min.js*",
+    "lint": "eslint src/*.js *.js",
+    "lint:fix": "eslint src/*.js *.js --fix",
+    "generate-config-docs": "node generate-config-docs.js"
+  },
+  "license": "AGPLv3",
+  "dependencies": {
+    "@sitespeed.io/throttle": "^2.1.1",
+    "chalk": "^4.1.1",
+    "change-case": "^4.1.2",
+    "convict": "^6.1.0",
+    "convict-format-with-validator": "^6.0.1",
+    "debug": "^4.3.1",
+    "debug-level": "^2.0.2",
+    "fast-stats": "^0.0.6",
+    "moment": "^2.29.1",
+    "pidusage": "^2.0.21",
+    "ps-tree": "^1.2.0",
+    "puppeteer": "^9.1.1",
+    "request": "^2.88.2",
+    "requestretry": "^5.0.0",
+    "sprintf-js": "^1.1.2",
+    "ws": "^7.4.5"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
+    "chai": "^4.2.0",
+    "chai-datetime": "^1.5.0",
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "mocha": "^8.3.0",
+    "nodemon": "^2.0.7",
+    "terser-webpack-plugin": "^2.3.0",
+    "typescript": "^4.2.4",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2",
+    "xml2js": "^0.4.22"
+  }
+}

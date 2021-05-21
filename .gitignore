@@ -1,0 +1,12 @@
+node_modules
+app.min.js*
+logs
+*.mp4
+*.mkv
+*.deb
+*.zip
+*.xz
+yarn.lock*
+yarn-error.log
+.vscode
+config.json
