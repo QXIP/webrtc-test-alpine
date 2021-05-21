@@ -1,5 +1,5 @@
 {
-  "name": "webrtc-stress-test-alpine",
+  "name": "webrtc-test-alpine",
   "version": "1.0.3",
   "author": {
     "name": "Lorenzo Mangani <lorenzo.mangani@gmail.com>",
@@ -10,8 +10,8 @@
     "start": "node app.min.js",
     "start:dev": "nodemon index.js",
     "test": "mocha",
-    "build": "yarn && yarn lint && webpack --config webpack.config.js -p && docker build -t qxip/webrtc-stress-test-alpine .",
-    "push": "docker push qxip/webrtc-stress-test-alpine:latest && docker tag qxip/webrtc-stress-test-alpine qxip/webrtc-stress-test-alpine:$npm_package_version && docker push qxip/webrtc-stress-test-alpine:$npm_package_version",
+    "build": "yarn && yarn lint && webpack --config webpack.config.js -p && docker build -t qxip/webrtc-test-alpine .",
+    "push": "docker push qxip/webrtc-test-alpine:latest && docker tag qxip/webrtc-test-alpine qxip/webrtc-test-alpine:$npm_package_version && docker push qxip/webrtc-test-alpine:$npm_package_version",
     "clean": "rm -f app.min.js*",
     "lint": "eslint src/*.js *.js",
     "lint:fix": "eslint src/*.js *.js --fix",

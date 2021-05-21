@@ -350,8 +350,9 @@ module.exports.Stats = class {
         if (!config.enablePageLog) {
           console.clear();
         }
-        console.log(out, stats);
-      } else if (pastashEndpoint) {
+        console.log(out);
+      }
+      if (pastashEndpoint) {
         statsSocket.send(JSON.stringify(stats));
       } else {
         console.log(JSON.stringify(stats));
