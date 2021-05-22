@@ -18,4 +18,4 @@ docker run -it --rm --name=webrtc-stress-test-publisher \
     -e SHOW_STATS=true \
     -e ENABLE_RTC_STATS=true \
     -e PASTASH_WSS="$STATS_COLLECTOR" \
-    qxip/webrtc-stress-test-alpine:latest
+    qxip/webrtc-test-alpine:latest
