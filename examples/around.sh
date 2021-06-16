@@ -7,16 +7,19 @@ fi
 
 RANDOM_UUID=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 STATS_COLLECTOR=$1
-ROOM=$2
+ROOM_UUID=${2:-$RANDOM_UUID}
 docker run -it --rm --name=webrtc-stress-test-publisher \
     -v /dev/shm:/dev/shm \
-    -e URL="$ROOM" \
+    -e VIDEO_PATH=/video.mp4 \
+    -e URL="$ROOM_UUID" \
     -e SESSIONS=1 \
     -e TABS_PER_SESSION=1 \
     -e SHOW_STATS=false \
-    -e DEBUG_LEVEL=TRACE \
+    -e DEBUG_LEVEL=DEBUG \
     -e ENABLE_RTC_STATS=true \
+    -e ENABLE_PAGE_LOG=true \
     -e PASTASH_WSS="$STATS_COLLECTOR" \
-    -e SCRIPT_PATH=/janus.js \
-    -v $(pwd)/scripts/janus.js:/janus.js \
+    -e SCRIPT_PATH=/around.js \
+    -v $(pwd)/scripts/around.js:/around.js \
+    -v /tmp/video.mp4:/video.mp4 \
     qxip/webrtc-test-alpine:latest

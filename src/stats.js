@@ -15,6 +15,7 @@ const {config} = require('./config');
 
 const WebSocket = require('ws');
 const pastashEndpoint = process.env.PASTASH_WSS || false;
+const pastashEndpointId = process.env.PASTASH_ID || false;
 const statsSocket = pastashEndpoint ? new WebSocket(pastashEndpoint) : false;
 
 /**
@@ -353,6 +354,7 @@ module.exports.Stats = class {
         console.log(out);
       }
       if (pastashEndpoint) {
+        if (pastashEndpointId) stats.id = pastashEndpointId;
         statsSocket.send(JSON.stringify(stats));
       }
 
