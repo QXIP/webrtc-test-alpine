@@ -45,7 +45,9 @@ module.exports.rtcStats = function(stats, now, index, sample) {
 
     const {inboundRTPStats, remoteInboundRTPStats, tracks} = receiverStats;
     for (const stat of remoteInboundRTPStats) {
-      log.debug('remoteInboundRTPStats', util.inspect(stat, {depth: null}));
+      log.debug('receiver-remoteInbound', util.inspect(stat, {depth: null}));
+      // RTT
+      if (stat.roundTripTime) stats.roundTripTime[key] = stat.roundTripTime;
     }
     for (const stat of inboundRTPStats) {
       log.debug('inboundRTPStats', util.inspect(stat, {depth: null}));
@@ -145,8 +147,6 @@ module.exports.rtcStats = function(stats, now, index, sample) {
         // update values
         stats.videoBytesReceived[key] = stat.bytesReceived;
       }
-      // RTT
-      if (stat.roundTripTime) stats.roundTripTime[key] = stat.roundTripTime;
       stats._timestamps[key] = now;
     }
 
@@ -207,7 +207,9 @@ module.exports.rtcStats = function(stats, now, index, sample) {
     log.debug('senderStats', util.inspect(senderStats, {depth: null}));
 
     for (const stat of remoteInboundRTPStats) {
-      log.debug('remoteInboundRTPStats', util.inspect(stat, {depth: null}));
+      log.debug('sender-remoteInbound', util.inspect(stat, {depth: null}));
+      // RTT
+      if (stat.roundTripTime) stats.roundTripTime[key] = stat.roundTripTime;
     }
 
 
