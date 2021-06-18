@@ -10,7 +10,7 @@
     "start": "node app.min.js",
     "start:dev": "nodemon index.js",
     "test": "mocha",
-    "build": "yarn && yarn lint && webpack --config webpack.config.js -p && docker build -t qxip/webrtc-test-alpine .",
+    "build": "yarn && yarn lint --fix && webpack --config webpack.config.js -p && docker build -t qxip/webrtc-test-alpine .",
     "push": "docker push qxip/webrtc-test-alpine:latest && docker tag qxip/webrtc-test-alpine qxip/webrtc-test-alpine:$npm_package_version && docker push qxip/webrtc-test-alpine:$npm_package_version",
     "clean": "rm -f app.min.js*",
     "lint": "eslint src/*.js *.js",

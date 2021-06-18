@@ -18,5 +18,7 @@ docker run -it --rm --name=webrtc-stress-test-publisher \
     -e ENABLE_RTC_STATS=true \
     -e PASTASH_WSS="$STATS_COLLECTOR" \
     -e SCRIPT_PATH=/janus.js \
+    -e VIDEO_PATH=/video.mp4 \
+    -v /tmp/video.mp4:/video.mp4 \
     -v $(pwd)/scripts/janus.js:/janus.js \
     qxip/webrtc-test-alpine:latest

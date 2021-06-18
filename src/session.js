@@ -233,7 +233,7 @@ window.GET_USER_MEDIA_OVERRIDE = JSON.parse('${JSON.stringify(override)}');
       this.stats.tabs = this.pages.size;
     });
 
-    page.on('dialog', async dialog => {
+    page.on('dialog', async (dialog) => {
       console.log(dialog.message());
       await dialog.dismiss();
     });

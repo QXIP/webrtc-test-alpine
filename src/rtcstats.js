@@ -1,4 +1,5 @@
 const log = require('debug-level')('app:rtcstats');
+const util = require('util');
 const {config} = require('./config');
 
 const RTC_STATS_NAMES = module.exports.RTC_STATS_NAMES = [
@@ -26,6 +27,8 @@ const RTC_STATS_NAMES = module.exports.RTC_STATS_NAMES = [
   'videoRetransmittedBytesSent',
   'videoSendBitrates',
   'qualityLimitationResolutionChanges',
+  // network
+  'roundTripTime',
 ];
 
 module.exports.rtcStats = function(stats, now, index, sample) {
@@ -38,11 +41,14 @@ module.exports.rtcStats = function(stats, now, index, sample) {
 
   // receiver
   if (receiverStats) {
-    // log.debug('rtcStats', util.inspect(receiverStats, { depth: null }));
+    log.debug('receiverStats', util.inspect(receiverStats, {depth: null}));
 
-    const {inboundRTPStats, tracks} = receiverStats;
+    const {inboundRTPStats, remoteInboundRTPStats, tracks} = receiverStats;
+    for (const stat of remoteInboundRTPStats) {
+      log.debug('remoteInboundRTPStats', util.inspect(stat, {depth: null}));
+    }
     for (const stat of inboundRTPStats) {
-      // log.debug('rtcStats', util.inspect(stat, { depth: null }));
+      log.debug('inboundRTPStats', util.inspect(stat, {depth: null}));
       /*
         {
         bytesReceived: 923,
@@ -115,6 +121,7 @@ module.exports.rtcStats = function(stats, now, index, sample) {
       if (stat.mediaType === 'audio') {
         stats.audioPacketsLost[key] = 100 * stat.packetsLost /
           (stat.packetsLost + stat.packetsReceived);
+        // Jitter
         stats.audioJitter[key] = stat.jitter;
         // calculate rate
         if (stats._timestamps[key]) {
@@ -138,6 +145,8 @@ module.exports.rtcStats = function(stats, now, index, sample) {
         // update values
         stats.videoBytesReceived[key] = stat.bytesReceived;
       }
+      // RTT
+      if (stat.roundTripTime) stats.roundTripTime[key] = stat.roundTripTime;
       stats._timestamps[key] = now;
     }
 
@@ -194,8 +203,13 @@ module.exports.rtcStats = function(stats, now, index, sample) {
 
   // sender
   if (senderStats) {
-    const {mediaSources, outboundRTPStats} = senderStats;
-    // log.debug('rtcStats', util.inspect(senderStats, { depth: null }));
+    const {mediaSources, outboundRTPStats, remoteInboundRTPStats} = senderStats;
+    log.debug('senderStats', util.inspect(senderStats, {depth: null}));
+
+    for (const stat of remoteInboundRTPStats) {
+      log.debug('remoteInboundRTPStats', util.inspect(stat, {depth: null}));
+    }
+
 
     for (const stat of mediaSources) {
       // log.debug('rtcStats', util.inspect(stat, { depth: null }));
@@ -228,7 +242,7 @@ module.exports.rtcStats = function(stats, now, index, sample) {
     }
 
     for (const stat of outboundRTPStats) {
-      // log.debug('rtcStats', util.inspect(stat, { depth: null }));
+      log.debug('outboundRTPStats', util.inspect(stat, {depth: null}));
       /*
         {
           bytesSent: 245987,
@@ -276,6 +290,8 @@ module.exports.rtcStats = function(stats, now, index, sample) {
         }
       */
       const key = `${index}_${peerConnectionId}_${stat.id}`;
+
+      if (stat.roundTripTime) stats.roundTripTime[key] = stat.roundTripTime;
 
       if (stat.mediaType === 'audio') {
         // calculate rate
