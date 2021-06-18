@@ -98,7 +98,7 @@ multiple runs.`,
   chromiumPath: {
     doc: `The Chromium executable path.`,
     format: String,
-    default: '/usr/bin/chromium-browser-unstable',
+    default: '/usr/bin/chromium-browser',
     env: 'CHROMIUM_PATH',
     arg: 'chromium-path',
   },

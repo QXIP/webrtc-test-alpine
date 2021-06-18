@@ -1,7 +1,7 @@
 const log = require('debug-level')('app:session');
 const EventEmitter = require('events');
 const fs = require('fs');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const chalk = require('chalk');
 const requestretry = require('requestretry');
 //
