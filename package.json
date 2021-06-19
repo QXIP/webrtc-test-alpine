@@ -34,7 +34,7 @@
     "request": "^2.88.2",
     "requestretry": "^5.0.0",
     "sprintf-js": "^1.1.2",
-    "ws": "^7.4.5"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.1",
