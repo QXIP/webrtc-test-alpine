@@ -28,7 +28,8 @@ const RTC_STATS_NAMES = module.exports.RTC_STATS_NAMES = [
   'videoSendBitrates',
   'qualityLimitationResolutionChanges',
   // network
-  'roundTripTime',
+  'audioRoundTripTime',
+  'videoRoundTripTime',
 ];
 
 module.exports.rtcStats = function(stats, now, index, sample) {
@@ -48,8 +49,13 @@ module.exports.rtcStats = function(stats, now, index, sample) {
       log.debug('receiver-remoteInbound', util.inspect(stat, {depth: null}));
       const key = `${index}_${peerConnectionId}_${stat.id}`;
       // RTT
-      if (stat.roundTripTime) stats.roundTripTime[key] = stat.roundTripTime;
+      if (stat.mediaType === 'audio' && stat.roundTripTime) {
+        stats.audioRoundTripTime[key] = stat.roundTripTime;
+      } else if (stat.mediaType === 'video' && stat.roundTripTime) {
+        stats.videoRoundTripTime[key] = stat.roundTripTime;
+      }
     }
+
     for (const stat of inboundRTPStats) {
       log.debug('inboundRTPStats', util.inspect(stat, {depth: null}));
       /*
@@ -211,7 +217,11 @@ module.exports.rtcStats = function(stats, now, index, sample) {
       log.debug('sender-remoteInbound', util.inspect(stat, {depth: null}));
       const key = `${index}_${peerConnectionId}_${stat.id}`;
       // RTT
-      if (stat.roundTripTime) stats.roundTripTime[key] = stat.roundTripTime;
+      if (stat.mediaType === 'audio' && stat.roundTripTime) {
+        stats.audioRoundTripTime[key] = stat.roundTripTime;
+      } else if (stat.mediaType === 'video' && stat.roundTripTime) {
+        stats.videoRoundTripTime[key] = stat.roundTripTime;
+      }
     }
 
 
