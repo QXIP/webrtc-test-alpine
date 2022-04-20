@@ -4289,14 +4289,13 @@ request@^2.88.2:
     tunnel-agent "^0.6.0"
     uuid "^3.3.2"
 
-requestretry@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/requestretry/-/requestretry-5.0.0.tgz#be630c72de3da357e2bf5ebfb5ed6a4e14535ccb"
-  integrity sha512-Rx0ETW0O1K+PAL/w8XVE2yhBCEtEsu6H690qbyCBT9mAHetXaO3BQ5hO5QGGkawTu9jG29ErmfqJZwX+dUy4tw==
+requestretry@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/requestretry/-/requestretry-7.0.0.tgz#570a9fcbeb2d6a85d7f15eb2265840d787f0c44d"
+  integrity sha512-g1Odu3IBKb6fYQog+HLy5FZ1CMwejIpD0iX1u1qXLsRj8TeQmFCpX9pTe50qhIirKvx1mcmoAeuLBFXLlBw6vA==
   dependencies:
     extend "^3.0.2"
     lodash "^4.17.15"
-    when "^3.7.7"
 
 require-directory@^2.1.1:
   version "2.1.1"
@@ -5444,11 +5443,6 @@ webpack@^4.41.2:
     terser-webpack-plugin "^1.4.3"
     watchpack "^1.7.4"
     webpack-sources "^1.4.1"
-
-when@^3.7.7:
-  version "3.7.8"
-  resolved "https://registry.yarnpkg.com/when/-/when-3.7.8.tgz#c7130b6a7ea04693e842cdc9e7a1f2aa39a39f82"
-  integrity sha1-xxMLan6gRpPoQs3J56Hyqjmjn4I=
 
 which-boxed-primitive@^1.0.2:
   version "1.0.2"
