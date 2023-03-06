@@ -19,7 +19,7 @@
   },
   "license": "AGPLv3",
   "dependencies": {
-    "@sitespeed.io/throttle": "^2.1.1",
+    "@sitespeed.io/throttle": "^5.0.0",
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
     "convict": "^6.2.2",
